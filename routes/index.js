@@ -4,6 +4,7 @@ const Promise = require('promise');
 const utils = require('../utils');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -69,6 +70,28 @@ router.get('/genposter', function(req, res, next){
       res.json(obj);
     })
 
+});
+
+router.get('/api', function(req, res, next){
+  axios.get('https://www.baidu.com')
+  .then(function(response){
+    res.json(response.data);
+  })
+  .catch(function(err){
+    console.log(err);
+    res.json({code: 201});
+  });
+  // axios.post('https://mobipromo.io/telegram/info',{
+  //   identitycode: 'Qf8PO2aoaYCvNN1JroTrc7UdO/w04fk7npnBtE+n76HZcorT2bjuRori8ylWv4Y0TeMj+s3K2eCJcwxtVIsC7g=='
+  // })
+  // .then(function (response) {
+  //   console.log(response);
+  //   res.json(response.data);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  //   res.json({code:201});
+  // });
 });
 
 module.exports = router;
