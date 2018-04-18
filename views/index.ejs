@@ -9,11 +9,26 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <button id="btn">一键生成海报</button>
+    <span id="content">返回的数据</span>
+    <a id="imga" href="" target="_blank">点击</a>
     <script>
       $(function(){
-        var code = '123456789';
+       var code = '123456789';
        $('#btn').click(function(){
-          window.location.href = '/genposter?identitycode='+code;
+          $.ajax({
+            url: '/genposter',
+            type: 'post',
+            data: {
+              identitycode: 'C0xZdh9XdwhZs+X/waxQQVs2FT1y7PEf3qFR1DEnSC3noATU4Ok5Zc4IYrl58uTT0Rx7M9GvWiCMrzEDeGazDQ=='
+            },
+            success: function(res){
+              $('#content').html(JSON.stringify(res));
+              $('#imga').attr('href', '/poster/'+res.path);
+            },
+            error: function(err){
+              console.log(err);
+            }
+          });
        });
       });
     </script>
